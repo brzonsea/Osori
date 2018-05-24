@@ -1,0 +1,31 @@
+.search-container {
+  float: none;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  display: inline-block;
+}
+
+.search-box {
+  width: 600px;
+  height: 80px;
+  border: solid 3px #4a90e2;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-box-input {
+  float: left;
+  width: 237px;
+  height: 31px;
+  font-family: NanumSquare;
+  font-size: 28px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #4a4a4a;
+}
