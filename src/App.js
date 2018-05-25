@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import { logoImage } from './assets/images';
 
+
 import SearchBox from './components/SearchBox/SearchBox';
 
 class App extends Component {
