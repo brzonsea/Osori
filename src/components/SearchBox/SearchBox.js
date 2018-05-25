@@ -12,7 +12,9 @@ class SearchBox extends Component {
         <div className="search-box">
           <div className="search-box-input-container">
             <IoIosSearch className="search-icon" />
-            <input className="search-box-input" type="text" placeholder={ko.SEARCHBOXPLACEHOLDER} />
+            <div className="search-box-placeholder">
+            {ko.SEARCHBOXPLACEHOLDER}
+            </div>
           </div>
         </div>
       </div>
