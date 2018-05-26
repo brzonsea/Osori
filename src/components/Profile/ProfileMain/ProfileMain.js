@@ -18,10 +18,25 @@ class ProfileMain extends Component {
         </div>
         <div className="Profile-Main-Right-Container">
           <div className="first-row">
-            김정은
+            {this.props.name}
           </div>
           <div className="second-row">
-            #남북정상회담
+            {this.props.keywords.map((keyword) => {
+              return (
+                <div className="keyword">
+                  {keyword}
+                </div>
+              )
+            })}
+          </div>
+          <div className="third-row">
+            {this.props.relatedPpl.map((keyword) => {
+              return (
+                <div className="keyword">
+                  {keyword}
+                </div>
+              )
+            })}
           </div>
         </div>
       </div>

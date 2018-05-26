@@ -7,14 +7,20 @@ class ProfilePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      name: '김정은',
+      keywords: ['#남북정상회담', '#한반도비핵화', '#늙다리미치광이', '#로켓맨', '#최대다섯개'],
+      relatedPpl: ['@문재인', '@김여정', '@도널드트럼프', '@관련인물', '@최대다섯개'],
     }
   }
   render() {
     return (
       <div>
         <NavBar />
-        <ProfileMain />
+        <ProfileMain
+          name={this.state.name}
+          keywords={this.state.keywords}
+          relatedPpl={this.state.relatedPpl}
+        />
       </div>
     );
   }
