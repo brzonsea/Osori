@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import SearchIndexPage from './routes/SearchIndexPage';
 import SearchActivePage from './routes/SearchActivePage';
 import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner';
+import ProfilePage from './routes/ProfilePage';
 
 class Routes extends Component {
   constructor(props) {
@@ -23,6 +24,7 @@ class Routes extends Component {
       <Switch>
         <Route exact path='/' component={SearchIndexPage} />
         <Route path='/search' component={SearchActivePage} />
+        <Route path='/profile' component={ProfilePage} />
       </Switch>
     )
   }

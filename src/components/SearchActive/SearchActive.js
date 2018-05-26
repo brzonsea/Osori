@@ -9,11 +9,18 @@ class SearchActive extends Component {
     }
   }
 
+  handleSearchChange = (event) => {
+    this.setState({
+      searchText: event.target.value,
+    });
+  }
+
   render() {
+    console.log('SearchText', this.state.searchText);
     return (
       <div className="search-active-container">
         <div className="search-active-box">
-          <input className="search-active-input" />
+          <input className="search-active-input" type="text" onChange={this.handleSearchChange} />
         </div>
       </div>
     );

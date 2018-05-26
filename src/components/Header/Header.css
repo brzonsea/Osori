@@ -2,24 +2,16 @@ Header {
   text-align: center;
 }
 
-.Header-logo {
-  /* animation: Header-logo-spin infinite 20s linear; */
-  width: 101px;
-  height: 34px;
-  object-fit: contain;
-}
-
-.Header-title {
-  font-size: 1.5em;
-}
-
-.Header-intro {
-  font-size: large;
-}
-
 .Header-header {
   /* background-color: ; */
   height: 65px;
   padding: 20px;
   color: white;
+}
+
+.Header-logo {
+  /* animation: Header-logo-spin infinite 20s linear; */
+  width: 101px;
+  height: 34px;
+  object-fit: contain;
 }

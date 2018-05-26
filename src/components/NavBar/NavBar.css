@@ -1,0 +1,33 @@
+NavBar {
+  text-align: center;
+}
+
+.NavBar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 65px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.NavBar-logo {
+  width: 84px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.About-us {
+  margin-left: 180px;
+  width: 76px;
+  height: 20px;
+  font-family: NanumSquare;
+  font-size: 18px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #8a8a8a;
+}

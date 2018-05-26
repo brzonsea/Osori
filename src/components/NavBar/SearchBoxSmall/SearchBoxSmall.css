@@ -1,0 +1,28 @@
+.search-box-small {
+  margin-right: 180px;
+}
+.search-box-small-input-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.search-icon-small {
+  width: 18px;
+  height: 18px;
+
+}
+
+.search-box-small-placeholder {
+  margin-left: 10px;
+  width: 170px;
+  height: 20px;
+  font-family: NanumSquare;
+  font-size: 18px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #8a8a8a;
+}
