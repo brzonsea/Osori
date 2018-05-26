@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 import SearchBoxSmall from './SearchBoxSmall/SearchBoxSmall';
 import logo from '../../logo.svg';
 import './NavBar.css';
@@ -17,7 +18,9 @@ class NavBar extends Component {
         <header className="NavBar-header">
           <div className="About-us">About Us</div>
           <img src={logo} className="NavBar-logo" />
-          <SearchBoxSmall />
+          <Link to='/search' style={{ textDecoration: 'none' }}>
+            <SearchBoxSmall />
+          </Link>
         </header>
       </div>
     );
