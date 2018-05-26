@@ -1,0 +1,20 @@
+.search-active-container {
+  position: fixed;
+  display: inline-block;
+  margin-top: 50px;
+  left: 50%;
+  display: inline-block;
+  transform: translate(-50%, 0);
+}
+
+.search-active-box {
+  width: 600px;
+  height: 80px;
+  border: solid 3px #4a90e2;
+}
+
+.search-active-input {
+  width: 100%;
+  height: 100%;
+  border: transparent;
+}

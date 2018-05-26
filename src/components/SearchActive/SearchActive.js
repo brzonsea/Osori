@@ -8,4 +8,16 @@ class SearchActive extends Component {
       searchText: '',
     }
   }
+
+  render() {
+    return (
+      <div className="search-active-container">
+        <div className="search-active-box">
+          <input className="search-active-input" />
+        </div>
+      </div>
+    );
+  }
 }
+
+export default SearchActive;

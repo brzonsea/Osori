@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import App from './App';
+import SearchIndexPage from './routes/SearchIndexPage';
+import SearchActivePage from './routes/SearchActivePage';
 import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner';
 
 class Routes extends Component {
@@ -18,7 +19,11 @@ class Routes extends Component {
   render() {
     return (
       this.state.isLoading ? <LoadingSpinner loading />
-      : <App />
+      :
+      <Switch>
+        <Route exact path='/' component={SearchIndexPage} />
+        <Route path='/search' component={SearchActivePage} />
+      </Switch>
     )
   }
 }

@@ -4,10 +4,12 @@ import './Header.css';
 
 const Header = (props) => {
   return (
-    <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <h1 className="App-title">Welcome to React</h1>
-    </header>
+    <div className="Header">
+      <header className="Header-header">
+        <img src={logo} className="Header-logo" alt="logo" />
+        <h1 className="Header-title">Welcome to React</h1>
+      </header>
+    </div>
   );
 }
 

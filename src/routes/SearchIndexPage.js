@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-import {
-  Route,
-  Link
-} from 'react-router-dom'
-import Header from './components/Header/Header';
-import './App.css';
+import { Link } from 'react-router-dom'
+import Header from '../components/Header/Header';
 
 
-import SearchBox from './components/SearchBox/SearchBox';
+import SearchBox from '../components/SearchBox/SearchBox';
 
 class SearchIndexPage extends Component {
   constructor(props) {
@@ -18,9 +14,11 @@ class SearchIndexPage extends Component {
   }
   render() {
     return (
-      <div className="App">
+      <div>
         <Header />
-        <SearchBox />
+        <Link to='/search'>
+          <SearchBox />
+        </Link>
       </div>
     );
   }
