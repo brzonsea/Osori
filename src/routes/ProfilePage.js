@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import NavBar from '../components/NavBar/NavBar';
 import ProfileMain from '../components/Profile/ProfileMain/ProfileMain';
+import KeywordTimeline from '../components/KeywordTimeline/KeywordTimeline';
+import './ProfilePage.css';
 
 class ProfilePage extends Component {
   constructor(props) {
@@ -16,11 +18,14 @@ class ProfilePage extends Component {
     return (
       <div>
         <NavBar />
-        <ProfileMain
-          name={this.state.name}
-          keywords={this.state.keywords}
-          relatedPpl={this.state.relatedPpl}
-        />
+        <div className="Profile-box">
+          <ProfileMain
+            name={this.state.name}
+            keywords={this.state.keywords}
+            relatedPpl={this.state.relatedPpl}
+          />
+          <KeywordTimeline />
+        </div>
       </div>
     );
   }

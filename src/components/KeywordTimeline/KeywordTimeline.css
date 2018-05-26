@@ -1,0 +1,22 @@
+.Keyword-timeline-container {
+  background-color: #fafafa;
+  display: flex;
+  padding: 20px;
+  margin-left: 180px;
+  margin-right: 180px;
+  flex-direction: row;
+}
+
+.title-row {
+  width: 212px;
+  height: 35px;
+  font-family: NanumSquare.bold;
+  font-size: 32px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #4a4a4a;
+}
