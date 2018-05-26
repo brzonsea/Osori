@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import IoIosSearch from 'react-icons/lib/io/ios-search'
-import { searchIcon } from '../../assets/images';
 import { ko } from '../../lang';
 import './SearchBox.css';
 
