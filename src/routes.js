@@ -24,7 +24,7 @@ class Routes extends Component {
       <Switch>
         <Route exact path='/' component={SearchIndexPage} />
         <Route path='/search' component={SearchActivePage} />
-        <Route path='/profile' component={ProfilePage} />
+        <Route path='/profile/:id' component={ProfilePage} />
       </Switch>
     )
   }

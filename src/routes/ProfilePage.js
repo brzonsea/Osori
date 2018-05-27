@@ -14,6 +14,11 @@ class ProfilePage extends Component {
       relatedPpl: ['@문재인', '@김여정', '@도널드트럼프', '@관련인물', '@최대다섯개'],
     }
   }
+
+  componentDidMount() {
+    console.log('match props', this.props.match);
+  }
+  
   render() {
     return (
       <div>

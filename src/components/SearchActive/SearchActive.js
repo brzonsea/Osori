@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Autosuggest from 'react-autosuggest';
 import './SearchActive.css';
 
@@ -45,7 +46,18 @@ class SearchActive extends Component {
 
   componentWillReceiveProps(nextProps) {
     console.log('SearchActive Profiles props', nextProps.profiles);
-    this.setState({ profilesList: nextProps.profiles });
+    if (nextProps.profiles) {
+      const keyAppendList = nextProps.profiles.map((profile, index) => {
+        return (
+          {
+            ...profile,
+            key: index
+          }
+        );
+      });
+      console.log('keyAppendList', keyAppendList);
+      this.setState({ profilesList: keyAppendList });
+    }
   }
 
   onChange = (event, { newValue, method }) => {
@@ -61,11 +73,16 @@ class SearchActive extends Component {
   }
 
   // Use your imagination to render suggestions.
-  renderSuggestion = suggestion => (
-    <div>
-      {suggestion.name}
-    </div>
-  );
+  renderSuggestion = suggestion => {
+    console.log('Suggestion', suggestion);
+    return (
+      <Link to={`/profile/${suggestion.key}`}>
+        <div className="Suggestion-box">
+        {suggestion.Name}
+        </div>
+      </Link>
+    );
+  }
 
   // Autosuggest will call this function every time you need to update suggestions.
   // You already implemented this logic above, so just use it.
