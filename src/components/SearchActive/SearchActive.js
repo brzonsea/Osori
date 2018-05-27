@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Autosuggest from 'react-autosuggest';
 import './SearchActive.css';
 
 class SearchActive extends Component {
@@ -6,8 +7,52 @@ class SearchActive extends Component {
     super(props);
     this.state = {
       searchText: '',
+      profilesList: [],
+      suggestions: [],
+      value: '',
     }
   }
+
+  escapeRegexCharacters = (str) => {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  getSuggestions = (value) => {
+    // const inputValue = value.trim().toLowerCase();
+    const escapedValue = this.escapeRegexCharacters(value.trim());
+    const inputValue = escapedValue.toLowerCase();
+    const inputLength = inputValue.length;
+    console.log('inputvalue?', inputValue);
+    if (inputValue === '') {
+      return [];
+    }
+    const { profilesList } = this.state;
+    console.log('inside getSuggestions', profilesList, inputLength);
+    const regex = new RegExp('\\b' + escapedValue, 'i');
+    return inputLength === 0 ? [] : this.state.profilesList.filter(profile => {
+      const compareString = profile.Name.toLowerCase().slice(0, inputLength);
+      console.log('To filter', profile.Name);
+      console.log('CompareString', compareString);
+      return compareString === inputValue
+    }
+    );
+    // return this.state.profile.filter(profile => regex.test(this.getSuggestionValue(profile.name)));
+  }
+
+  getSuggestionValue(suggestion) {
+    return `${suggestion.first} ${suggestion.last}`;
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('SearchActive Profiles props', nextProps.profiles);
+    this.setState({ profilesList: nextProps.profiles });
+  }
+
+  onChange = (event, { newValue, method }) => {
+    this.setState({
+      value: newValue
+    });
+  };
 
   handleSearchChange = (event) => {
     this.setState({
@@ -15,13 +60,49 @@ class SearchActive extends Component {
     });
   }
 
+  // Use your imagination to render suggestions.
+  renderSuggestion = suggestion => (
+    <div>
+      {suggestion.name}
+    </div>
+  );
+
+  // Autosuggest will call this function every time you need to update suggestions.
+  // You already implemented this logic above, so just use it.
+  onSuggestionsFetchRequested = ({ value }) => {
+    this.setState({
+      suggestions: this.getSuggestions(value)
+    });
+  };
+
+  // Autosuggest will call this function every time you need to clear suggestions.
+  onSuggestionsClearRequested = () => {
+    this.setState({
+      suggestions: []
+    });
+  };
+
+
   render() {
     console.log('SearchText', this.state.searchText);
+    const { value, suggestions, profilesList } = this.state;
+    console.log('Profiles List', profilesList);
+    console.log('Suggestions List', suggestions);
+    const inputProps = {
+      value,
+      onChange: this.onChange
+    };
+
     return (
       <div className="search-active-container">
-        <div className="search-active-box">
-          <input className="search-active-input" type="text" onChange={this.handleSearchChange} />
-        </div>
+        <Autosuggest
+          suggestions={suggestions}
+          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+          getSuggestionValue={this.getSuggestionValue}
+          renderSuggestion={this.renderSuggestion}
+          inputProps={inputProps}
+        />
       </div>
     );
   }
