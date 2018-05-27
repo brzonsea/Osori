@@ -17,7 +17,7 @@ class ProfileMain extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { name } = nextProps;
-    if (name) {
+    if (false && name) {
       console.log('client', client, name);
       client.search(name)
         .then(images => {
@@ -49,7 +49,7 @@ class ProfileMain extends Component {
     return(
       <div className="Profile-Main-Container">
         <div className="Profile-picture-container">
-          <img src={this.state.profilePicURL} className="Profile-picture" />
+          <img src={false ? this.state.profilePicURL : exampleProfile} className="Profile-picture" />
         </div>
         <div className="Profile-Main-Right-Container">
           <div className="first-row">

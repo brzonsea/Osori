@@ -4,6 +4,7 @@ import firebase from 'firebase/app';
 import NavBar from '../components/NavBar/NavBar';
 import ProfileMain from '../components/Profile/ProfileMain/ProfileMain';
 import KeywordTimeline from '../components/KeywordTimeline/KeywordTimeline';
+import NewsList from '../components/NewsList/NewsList';
 import './ProfilePage.css';
 
 class ProfilePage extends Component {
@@ -53,6 +54,11 @@ class ProfilePage extends Component {
             relatedPpl={this.state.relatedPpl}
           />
           <KeywordTimeline />
+        </div>
+        <div>
+          <NewsList
+            newsList={this.state.newsList}
+          />
         </div>
       </div>
     );
