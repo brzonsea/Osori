@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { profilesFetch, keywordsFetch } from './actions';
+import { profilesFetch, keywordsFetch, newsFetch } from './actions';
 import SearchIndexPage from './routes/SearchIndexPage';
 import SearchActivePage from './routes/SearchActivePage';
 import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner';
@@ -16,8 +16,10 @@ class Routes extends Component {
   }
 
   componentDidMount() {
+    // Firebase Realtime DB 에서 모든 정보 가져오기
     this.props.profilesFetch();
     this.props.keywordsFetch();
+    this.props.newsFetch();
     this.setState({ isLoading: false });
   }
 
@@ -28,7 +30,7 @@ class Routes extends Component {
       :
       <Switch>
         <Route exact path='/' component={SearchIndexPage} />
-        <Route path='/search' component={SearchActivePage} profiles={'abcdefg'} />
+        <Route path='/search' component={SearchActivePage} />
         <Route path='/profile/:id' component={ProfilePage} />
       </Switch>
     )
@@ -39,8 +41,9 @@ const mapStateToProps = (state) => {
   console.log('mapStateToProps', state);
   return {
     keywords: state.keywords,
-    profiles: state.profiles
+    profiles: state.profiles,
+    news: state.news
   }
 }
 
-export default connect(mapStateToProps, { profilesFetch, keywordsFetch })(Routes);
+export default connect(mapStateToProps, { profilesFetch, keywordsFetch, newsFetch })(Routes);

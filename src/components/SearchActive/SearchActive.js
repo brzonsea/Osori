@@ -45,19 +45,26 @@ class SearchActive extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('SearchActive Profiles props', nextProps.profiles);
-    if (nextProps.profiles) {
-      const keyAppendList = nextProps.profiles.map((profile, index) => {
-        return (
-          {
-            ...profile,
-            key: index
-          }
-        );
-      });
-      console.log('keyAppendList', keyAppendList);
-      this.setState({ profilesList: keyAppendList });
-    }
+    const { profiles, keywords } = nextProps;
+    const sameProfiles = this.props.profiles === profiles;
+    const sameKeywords = this.props.keywords === keywords;
+    if ( sameProfiles && sameKeywords ) return;
+    console.log('SearchActive Profiles props', profiles);
+    console.log(this.props.profiles === profiles);
+    console.log('SearchActive Keywords props', keywords);
+    console.log(this.props.keywords === keywords);
+    // if (nextProps.profiles) {
+    //   const keyAppendList = nextProps.profiles.map((profile, index) => {
+    //     return (
+    //       {
+    //         ...profile,
+    //         key: index
+    //       }
+    //     );
+    //   });
+    //   console.log('keyAppendList', keyAppendList);
+    //   this.setState({ profilesList: keyAppendList });
+    // }
   }
 
   onChange = (event, { newValue, method }) => {
