@@ -11,13 +11,26 @@ class ProfilePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '김정은',
-      keywords: ['#남북정상회담', '#한반도비핵화', '#늙다리미치광이', '#로켓맨', '#최대다섯개'],
-      relatedPpl: ['@문재인', '@김여정', '@도널드트럼프', '@관련인물', '@최대다섯개'],
+      name: '',
+      keywords: [],
+      relatedPpl: [],
       newsList: [],
       positions: [],
       nicknames: [],
+      profilePicURL: '',
     }
+  }
+
+  keywordsHandler(keywordsObj) {
+    const keywordDates = Object.keys(keywordsObj);
+    console.log('keywordDates', keywordDates);
+    keywordDates.sort((a,b) => { return b - a; });
+    console.log('keywordDates sorted, recent first', keywordDates);
+    const keywordList = keywordDates.map((key) => {
+      return { date: key, keywords: keywordsObj[key] }
+    });
+    console.log('keywordList', keywordList);
+    return keywordList;
   }
 
   componentDidMount() {
@@ -30,12 +43,15 @@ class ProfilePage extends Component {
         .once('value', (snapshot) => {
           console.log('Fetched Profile', snapshot.val());
           fetchedProfile = snapshot.val();
+          const { Name, Keywords, News, Nickname, Position, Photo } = fetchedProfile;
+          const keywordsList = this.keywordsHandler(Keywords);
           this.setState({
-            name: fetchedProfile.Name,
-            keywords: fetchedProfile.Keywords,
-            newsList: fetchedProfile.News,
-            positions: fetchedProfile.Position,
-            nicknames: fetchedProfile.Nickname,
+            name: Name,
+            keywords: keywordsList,
+            newsList: News,
+            nicknames: Nickname,
+            positions: Position,
+            profilePicURL: Photo,
           })
         }).catch(err => {
           console.log('Something Wrong While fetching Profile', err);
@@ -52,6 +68,7 @@ class ProfilePage extends Component {
             name={this.state.name}
             keywords={this.state.keywords}
             relatedPpl={this.state.relatedPpl}
+            profilePicURL={this.state.profilePicURL}
           />
           <KeywordTimeline />
         </div>

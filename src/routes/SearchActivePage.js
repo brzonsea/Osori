@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import firebase from 'firebase/app';
+import { profilesFetch, keywordsFetch } from '../actions';
 import Header from '../components/Header/Header';
 
 
@@ -15,18 +17,23 @@ class SearchActivePage extends Component {
   }
 
   componentDidMount() {
-    firebase.database().ref('Profiles')
-      .once('value', (snapshot) => {
-        console.log('Profiles', snapshot.val());
-        this.setState({ profiles: snapshot.val() })
-      }
-    ).catch(err => {
-      console.log('Something Wrong While fetching profiles', err);
-      }
-    )
+    console.log('SearchActivePage', this.props);
+    // firebase.database().ref('Profiles')
+    //   .once('value', (snapshot) => {
+    //     console.log('Profiles', snapshot.val());
+    //     this.setState({ profiles: snapshot.val() })
+    //   }
+    // ).catch(err => {
+    //   console.log('Something Wrong While fetching profiles', err);
+    //   }
+    // )
   }
-
+  componentWillReceiveProps(nextProps) {
+    console.log('nextProps', nextProps);
+  }
   render() {
+    console.log('Profiles', this.props.profiles);
+    console.log('Keywords', this.props.keywords);
     console.log('Inside SearchActivePage', this.state.profiles);
     return (
       <div>
@@ -39,4 +46,12 @@ class SearchActivePage extends Component {
   }
 }
 
-export default SearchActivePage;
+const mapStateToProps = (state) => {
+  console.log('mapStateToProps', state);
+  return {
+    keywords: state.keywords,
+    profiles: state.profiles
+  }
+}
+
+export default connect(mapStateToProps)(SearchActivePage);

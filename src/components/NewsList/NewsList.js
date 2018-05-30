@@ -24,7 +24,7 @@ class NewsList extends Component {
         <div className="title-row">
           {ko.KEYWORDNEWS}
         </div>
-        {
+        { newsList &&
           newsList.length !== 0 &&
           newsList.map((news) => {
             const { Broadcast, Date, Title, Link } = news;

@@ -11,15 +11,27 @@ class ProfileMain extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      name: '',
+      keywords: [],
       profilePicURL: '',
+      relatedPpl: [],
     }
   }
 
+  componentDidMount() {
+    this.propsHandler(this.props);
+  }
+
   componentWillReceiveProps(nextProps) {
-    const { name } = nextProps;
-    if (false && name) {
-      console.log('client', client, name);
-      client.search(name)
+    this.propsHandler(nextProps);
+  }
+
+  propsHandler(props) {
+    console.log('ProfileMain', props);
+  }
+
+  fetchGoogleImage(name) {
+    client.search(name)
         .then(images => {
           console.log('images fetched by google', images);
           if (images.length !== 0) {
@@ -42,21 +54,20 @@ class ProfileMain extends Component {
     }).catch(err => {
       console.log('Something wrong while fetching image search ', err);
     });
-    }
   }
 
   render() {
     return(
       <div className="Profile-Main-Container">
         <div className="Profile-picture-container">
-          <img src={false ? this.state.profilePicURL : exampleProfile} className="Profile-picture" />
+          <img src={true ? this.state.profilePicURL : exampleProfile} className="Profile-picture" />
         </div>
         <div className="Profile-Main-Right-Container">
           <div className="first-row">
-            {this.props.name}
+            {this.state.name}
           </div>
           <div className="second-row">
-            {this.props.keywords && this.props.keywords.map((keyword, index) => {
+            {this.state.keywords && this.state.keywords.map((keyword, index) => {
               if (index > 5) return;
               return (
                 <div className="keyword">
@@ -66,7 +77,7 @@ class ProfileMain extends Component {
             })}
           </div>
           {false && <div className="third-row">
-            {this.props.relatedPpl.map((keyword) => {
+            {this.state.relatedPpl.map((keyword) => {
               return (
                 <div className="keyword">
                   {keyword}

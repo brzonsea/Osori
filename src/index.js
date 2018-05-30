@@ -6,6 +6,11 @@ import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 import firebase from 'firebase';
 
+import { createStore, applyMiddleware } from 'redux';
+import { Provider  } from 'react-redux'
+import ReduxThunk from 'redux-thunk';
+import reducers from './reducers'
+
 // Initialize Firebase
 const config = {
   apiKey: "AIzaSyC8L-IC-hN1-5TDxemn91lTMEc4RWHkTsI",
@@ -17,11 +22,15 @@ const config = {
 };
 firebase.initializeApp(config);
 
+console.log(reducers);
+const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
 ReactDOM.render(
-  <Router>
-    <Routes />
-  </Router>,
+  <Provider store={store}>
+    <Router>
+      <Routes />
+    </Router>
+  </Provider>,
   document.getElementById('root')
 );
 registerServiceWorker();
