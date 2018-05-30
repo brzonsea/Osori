@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { profilesFetch, keywordsFetch, newsFetch } from './actions';
 import SearchIndexPage from './routes/SearchIndexPage';
@@ -11,7 +11,7 @@ class Routes extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: true,
+      isLoading: false,
     }
   }
 
@@ -46,4 +46,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { profilesFetch, keywordsFetch, newsFetch })(Routes);
+export default withRouter(connect(mapStateToProps, { profilesFetch, keywordsFetch, newsFetch })(Routes));

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Autosuggest from 'react-autosuggest';
+import ProfileObjToList from '../../lib/ProfileObjToList';
 import './SearchActive.css';
 
 class SearchActive extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchText: '',
       profilesList: [],
       suggestions: [],
       value: '',
@@ -23,7 +23,6 @@ class SearchActive extends Component {
     const escapedValue = this.escapeRegexCharacters(value.trim());
     const inputValue = escapedValue.toLowerCase();
     const inputLength = inputValue.length;
-    console.log('inputvalue?', inputValue);
     if (inputValue === '') {
       return [];
     }
@@ -31,9 +30,8 @@ class SearchActive extends Component {
     console.log('inside getSuggestions', profilesList, inputLength);
     const regex = new RegExp('\\b' + escapedValue, 'i');
     return inputLength === 0 ? [] : this.state.profilesList.filter(profile => {
+      if (profile.key === '0') return;
       const compareString = profile.Name.toLowerCase().slice(0, inputLength);
-      console.log('To filter', profile.Name);
-      console.log('CompareString', compareString);
       return compareString === inputValue
     }
     );
@@ -41,7 +39,8 @@ class SearchActive extends Component {
   }
 
   getSuggestionValue(suggestion) {
-    return `${suggestion.first} ${suggestion.last}`;
+    console.log('getSuggestionValue', suggestion);
+    return `${suggestion.Name}`;
   }
 
   componentWillReceiveProps(nextProps) {
@@ -53,6 +52,11 @@ class SearchActive extends Component {
     console.log(this.props.profiles === profiles);
     console.log('SearchActive Keywords props', keywords);
     console.log(this.props.keywords === keywords);
+    if (profiles) {
+      const profilesList = ProfileObjToList(profiles);
+      console.log('profileList', profilesList);
+      this.setState({ profilesList })
+    }
     // if (nextProps.profiles) {
     //   const keyAppendList = nextProps.profiles.map((profile, index) => {
     //     return (
@@ -75,7 +79,7 @@ class SearchActive extends Component {
 
   handleSearchChange = (event) => {
     this.setState({
-      searchText: event.target.value,
+      value: event.target.value,
     });
   }
 
@@ -85,7 +89,7 @@ class SearchActive extends Component {
     return (
       <Link to={`/profile/${suggestion.key}`}>
         <div className="Suggestion-box">
-        {suggestion.Name}
+          {suggestion.Name}
         </div>
       </Link>
     );
@@ -108,7 +112,6 @@ class SearchActive extends Component {
 
 
   render() {
-    console.log('SearchText', this.state.searchText);
     const { value, suggestions, profilesList } = this.state;
     console.log('Profiles List', profilesList);
     console.log('Suggestions List', suggestions);
