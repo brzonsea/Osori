@@ -3,6 +3,7 @@ import firebase from 'firebase';
 export function keywordsFetch() {
 
   return (dispatch) => {
+    console.log('inside keywordsFetch');
     firebase.database().ref('Keywords')
         .once('value', (snapshot) => {
           dispatch({ type: 'keywords_fetch_success',

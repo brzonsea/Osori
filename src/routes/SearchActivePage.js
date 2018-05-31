@@ -28,7 +28,6 @@ class SearchActivePage extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('mapStateToProps', state);
   return {
     keywords: state.keywords,
     profiles: state.profiles

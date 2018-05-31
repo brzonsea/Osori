@@ -1,0 +1,44 @@
+.Meta-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.Date-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 36px;
+  border-radius: 23px;
+  background-color: #f4f4f4;
+
+  font-family: NanumSquare;
+  font-size: 18px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #8a8a8a;
+}
+.keywords-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-left: 20px;
+
+}
+.keyword {
+  font-family: NanumSquare;
+  font-size: 24px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #3c3c3c;
+}

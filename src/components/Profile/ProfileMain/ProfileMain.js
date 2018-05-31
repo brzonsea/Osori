@@ -28,6 +28,13 @@ class ProfileMain extends Component {
 
   propsHandler(props) {
     console.log('ProfileMain', props);
+    const { name, keywords, profilePicURL, relatedPpl } = props;
+    this.setState({
+      name,
+      keywords,
+      profilePicURL,
+      relatedPpl
+    })
   }
 
   fetchGoogleImage(name) {
@@ -67,14 +74,16 @@ class ProfileMain extends Component {
             {this.state.name}
           </div>
           <div className="second-row">
-            {this.state.keywords && this.state.keywords.map((keyword, index) => {
+            {false
+              && this.state.keywords.map((keyword, index) => {
               if (index > 5) return;
               return (
                 <div className="keyword">
                   {`#${keyword}`}
                 </div>
               )
-            })}
+            })
+          }
           </div>
           {false && <div className="third-row">
             {this.state.relatedPpl.map((keyword) => {

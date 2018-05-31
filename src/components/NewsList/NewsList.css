@@ -89,3 +89,11 @@
   text-align: left;
   color: #08400b;
 }
+
+.News-day-card {
+  margin-bottom: 50px;
+}
+
+.link-to-news {
+  text-decoration: none;
+}
