@@ -54,7 +54,7 @@ class NewsList extends Component {
             });
           return (
             <div className="News-day-card" key={`${year}.${month}.${day}`} id={`${year}.${month}.${day}`}>
-              <NewsCardMeta date={{ year, month, day}} keywords={keywords[Date]} />
+              <NewsCardMeta date={{ year, month, day}} keywords={keywords ? keywords[Date] : null} />
              {newsCardDay}
             </div>
           );

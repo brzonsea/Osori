@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import GoogleImages from 'google-images';
-import { exampleProfile } from '../../../assets/images';
 import './ProfileMain.css';
 
 const API_KEY = 'AIzaSyC8L-IC-hN1-5TDxemn91lTMEc4RWHkTsI';
@@ -12,7 +11,7 @@ class ProfileMain extends Component {
     super(props);
     this.state = {
       name: '',
-      keywords: [],
+      keywords: null,
       profilePicURL: '',
       relatedPpl: [],
     }
@@ -65,18 +64,18 @@ class ProfileMain extends Component {
     return(
       <div className="Profile-Main-Container">
         <div className="Profile-picture-container">
-          <img src={true ? this.state.profilePicURL : exampleProfile} className="Profile-picture" />
+          <img src={this.state.profilePicURL} className="Profile-picture" />
         </div>
         <div className="Profile-Main-Right-Container">
           <div className="first-row">
             {this.state.name}
           </div>
           <div className="second-row">
-            {false
+            {this.state.keywords
               && this.state.keywords.map((keyword, index) => {
               if (index > 5) return;
               return (
-                <div className="keyword">
+                <div className="keyword" key={index}>
                   {`#${keyword}`}
                 </div>
               )
