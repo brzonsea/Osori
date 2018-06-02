@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import GoogleImages from 'google-images';
 import './ProfileMain.css';
 
@@ -41,20 +42,6 @@ class ProfileMain extends Component {
           if (images.length !== 0) {
             this.setState({ profilePicURL: images[0].thumbnail.url })
           }
-          /*
-          [{
-          "url": "http://steveangello.com/boss.jpg",
-          "type": "image/jpeg",
-          "width": 1024,
-          "height": 768,
-          "size": 102451,
-          "thumbnail": {
-          "url": "http://steveangello.com/thumbnail.jpg",
-          "width": 512,
-          "height": 512
-        }
-      }]
-      */
     }).catch(err => {
       console.log('Something wrong while fetching image search ', err);
     });
@@ -75,22 +62,15 @@ class ProfileMain extends Component {
               && this.state.keywords.map((keyword, index) => {
               if (index > 5) return;
               return (
-                <div className="keyword" key={index}>
-                  {`#${keyword}`}
-                </div>
+                <Link to={`/keywords/${keyword}`} style={{ textDecoration: 'none' }} key={index}>
+                  <div className="keyword" key={index}>
+                    {`#${keyword}`}
+                  </div>
+                </Link>
               )
             })
           }
           </div>
-          {false && <div className="third-row">
-            {this.state.relatedPpl.map((keyword) => {
-              return (
-                <div className="keyword">
-                  {keyword}
-                </div>
-              )
-            })}
-          </div>}
         </div>
       </div>
     );

@@ -119,7 +119,6 @@ class ProfilePage extends Component {
               <ProfileMain
                 name={fetchedProfile.Name}
                 keywords={profileKeywords}
-                relatedPpl={fetchedProfile.relatedPpl}
                 profilePicURL={fetchedProfile.Photo}
               />
               {
