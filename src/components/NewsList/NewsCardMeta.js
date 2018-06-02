@@ -3,8 +3,6 @@ import './NewsCardMeta.css';
 
 const NewsCardMeta = ({date, keywords}) => {
   const { year, month, day } = date;
-  console.log('Newsmetadata keywords', keywords);
-
   return (
     <div className="Meta-container">
       <div className="Date-box">
@@ -15,7 +13,7 @@ const NewsCardMeta = ({date, keywords}) => {
           keywords.map((keyword, index) => {
             if (index >= 5) return;
             return (
-              <div className="keyword">
+              <div className="keyword" key={index}>
                 {`#${keyword}`}
               </div>
             )

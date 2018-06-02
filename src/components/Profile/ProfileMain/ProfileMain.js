@@ -27,7 +27,6 @@ class ProfileMain extends Component {
   }
 
   propsHandler(props) {
-    console.log('ProfileMain', props);
     const { name, keywords, profilePicURL, relatedPpl } = props;
     this.setState({
       name,
@@ -40,7 +39,6 @@ class ProfileMain extends Component {
   fetchGoogleImage(name) {
     client.search(name)
         .then(images => {
-          console.log('images fetched by google', images);
           if (images.length !== 0) {
             this.setState({ profilePicURL: images[0].thumbnail.url })
           }

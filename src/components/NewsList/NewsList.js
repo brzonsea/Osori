@@ -9,30 +9,15 @@ class NewsList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      allNews: null,
-      newsList: null,
       orderChronological: false,
     }
   }
-
-  componentWillReceiveProps(nextProps) {
-    console.log('newsList', nextProps.newsList);
-    console.log('allNews', nextProps.allNews);
-    const newsListSame = nextProps.newsList === this.props.newsList;
-    const allNewsSame = nextProps.allNews === this.props.allNews;
-    if (newsListSame && allNewsSame) return;
-
-    const news = NewsObjToList(nextProps.newsList);
-    const allNews = nextProps.allNews;
-    console.log('news', news);
-    this.setState({ newsList: news, allNews });
-  }
-
 
   render() {
     console.log('inside NewsList render', this.props);
     const { allNews, keywords } = this.props;
     const newsList = NewsObjToList(this.props.newsList);
+    if (Object.keys(allNews).length === 0) return null;
     return (
       <div className="News-List-Container">
         <div className="title-row">
@@ -41,15 +26,11 @@ class NewsList extends Component {
         { newsList && allNews &&
           newsList.length !== 0 &&
           newsList.map((news) => {
-            console.log('news item', news);
             const Date = Object.keys(news)[0];
             const { year, month, day } = DateParser(Date);
             const newsOfDateArray = news[Date].news;
-            console.log('newsOfDateArray', newsOfDateArray);
             const newsCardDay = newsOfDateArray.map((newsOfDate) => {
-              console.log('newsOfDate', newsOfDate);
               const newsItem = allNews[Date][newsOfDate];
-              console.log('newsItem', newsItem);
               if (!newsItem) return;
               return (
                 <div key={Date + newsOfDate} className="News-Container">
@@ -72,12 +53,12 @@ class NewsList extends Component {
                 </div>
               );
             });
-            return (
-              <div className="News-day-card" key={Date}>
-                <NewsCardMeta date={{ year, month, day}} keywords={keywords[Date]} />
-               {newsCardDay}
-              </div>
-            );
+          return (
+            <div className="News-day-card" key={Date}>
+              <NewsCardMeta date={{ year, month, day}} keywords={keywords[Date]} />
+             {newsCardDay}
+            </div>
+          );
           })
         }
       </div>
