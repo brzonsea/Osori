@@ -1,4 +1,4 @@
-const NewsObjToList = (newsObj) => {
+export const NewsObjToList = (newsObj) => {
   const newsDates = Object.keys(newsObj);
   const newsList = newsDates.map((date) => {
     return {
@@ -11,5 +11,3 @@ const NewsObjToList = (newsObj) => {
   newsList.sort((a, b) => { return Object.keys(b)[0] - Object.keys(a)[0] });
   return newsList;
 }
-
-export default NewsObjToList;

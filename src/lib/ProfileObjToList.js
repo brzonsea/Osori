@@ -1,4 +1,4 @@
-const ProfileObjToList = (profileObj) => {
+export const ProfileObjToList = (profileObj) => {
   const profileKeys = Object.keys(profileObj);
   const profileList = profileKeys.map((key) => {
     return {
@@ -9,5 +9,3 @@ const ProfileObjToList = (profileObj) => {
   profileList.unshift({ key: '0' })
   return profileList;
 }
-
-export default ProfileObjToList;

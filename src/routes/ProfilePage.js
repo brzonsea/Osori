@@ -7,7 +7,7 @@ import ProfileMain from '../components/Profile/ProfileMain/ProfileMain';
 import KeywordTimeline from '../components/KeywordTimeline/KeywordTimeline';
 import NewsList from '../components/NewsList/NewsList';
 import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
-import ProfileObjToList from '../lib/ProfileObjToList';
+import { ProfileObjToList, CheckEmptyObj, DateParser } from '../lib';
 import './ProfilePage.css';
 
 class ProfilePage extends Component {
@@ -15,81 +15,78 @@ class ProfilePage extends Component {
     super(props);
     this.state = {
       name: '',
-      keywords: [],
+      keywords: {},
+      news: {},
+      profiles: {},
       relatedPpl: [],
       newsList: [],
       positions: [],
       nicknames: [],
+      fetchedProfile: null,
       profilePicURL: '',
       allNews: null,
+      scrollToId: 0,
+      scrollToIdPrev: 0,
+      datesFormattedList: [],
     }
   }
 
-  keywordsHandler(keywordsObj) {
-    const keywordDates = Object.keys(keywordsObj);
-    console.log('keywordDates', keywordDates);
-    keywordDates.sort((a,b) => { return b - a; });
-    console.log('keywordDates sorted, recent first', keywordDates);
-    const keywordList = keywordDates.map((key) => {
-      return { date: key, keywords: keywordsObj[key] }
-    });
-    console.log('keywordList', keywordList);
-    return keywordList;
+  propsHandler(props) {
+    console.log('ProfilePage', props);
+    const { match, keywords, news, profiles } = props;
+
+    if (!CheckEmptyObj(keywords) && keywords !== this.state.keywords) {
+      this.setState({ keywords });
+    }
+    if (!CheckEmptyObj(news) && news !== this.state.news) {
+      this.setState({ news });
+    }
+    if (!CheckEmptyObj(profiles) && profiles !== this.state.profiles) {
+      if (match.params.id) {
+        const id = match.params.id;
+        if (profiles && profiles[id]) {
+          const fetchedProfile = profiles[id];
+          const keywordDatesList = Object.keys(fetchedProfile.Keywords);
+          keywordDatesList.sort((a,b) => {return a - b});
+          const datesFormattedList = keywordDatesList.map((date) => {
+            const { year, month, day } = DateParser(date);
+            return `${year}.${month}.${day}`
+          })
+          console.log('datesFormattedList', datesFormattedList);
+          this.setState({ profiles, datesFormattedList, fetchedProfile,
+            scrollToId: keywordDatesList.length - 1
+          });
+        }
+      }
+    }
   }
-  // componentDidMount() {
-  //   console.log('Profilepage componentDidMount', this.props);
-  // }
-  // componentWillReceiveProps(nextProps) {
-  //   console.log('nextProps', nextProps);
-  //   console.log('this.props.profiles', this.props.profiles);
-  //   console.log('match props', this.props.match);
-  //   const isSameNews = this.props.news === nextProps.news;
-  //   const isSameProfiles = this.props.profiles === nextProps.profiles;
-  //   const isSameKeywords = this.props.keywords === nextProps.keywords;
-  //   if (isSameNews && isSameKeywords && isSameProfiles) return;
-  //
-  //   const { match, profiles, keywords, news } = nextProps;
-  //   let id;
-  //   if (match.params.id) {
-  //     id = match.params.id;
-  //     if (profiles && profiles[id]) {
-  //       const fetchedProfile = profiles[id];
-  //       console.log('fetchedProfile', fetchedProfile);
-  //       const { Name, Keywords, News, Nickname, Position, Photo } = fetchedProfile;
-  //       this.setState({
-  //         name: Name,
-  //         keywords: Keywords,
-  //         newsList: News,
-  //         nicknames: Nickname,
-  //         positions: Position,
-  //         profilePicURL: Photo,
-  //       })
-  //     }
-  //   }
-  //
-  //   if (Object.keys(news).length !== 0) {
-  //     this.setState({
-  //       allNews: news
-  //     })
-  //   }
-  // }
+  onKeywordClick = (index) => {
+    const elementId = this.state.datesFormattedList[index];
+    console.log('elementId', elementId);
+    const element = document.getElementById(elementId);
+    console.log('element', element);
+    element.scrollIntoView(true); 
+      this.setState({ scrollToId: index, scrollToIdPrev: this.state.scrollToId });
+  }
+
+  componentDidMount() {
+    this.propsHandler(this.props);
+  }
+  componentWillReceiveProps(nextProps) {
+    this.propsHandler(nextProps);
+  }
 
   render() {
     console.log('Inside ProfilePage render', this.props);
-    const { match, profiles, keywords, news } = this.props;
-    let id;
-    let fetchedProfile;
-    if (match.params.id) {
-      id = match.params.id;
-      if (profiles && profiles[id]) {
-        fetchedProfile = profiles[id];
-      }
-    }
+    const { match } = this.props;
+    const { profiles, keywords, news, fetchedProfile, datesFormattedList } = this.state;
+    console.log(this.state);
+
     return (
       <div>
         <NavBar />
         {
-          fetchedProfile ?
+          fetchedProfile && !CheckEmptyObj(keywords) && !CheckEmptyObj(news) ?
           <div>
             <div className="Profile-box">
               <ProfileMain
@@ -100,12 +97,15 @@ class ProfilePage extends Component {
               />
               <KeywordTimeline
                 keywords={fetchedProfile.Keywords}
+                onClick={this.onKeywordClick.bind(this)}
+                scrollToId={this.state.scrollToId}
+                datesFormattedList={datesFormattedList}
               />
             </div>
             <div>
               <NewsList
                 newsList={fetchedProfile.News}
-                allNews={news}
+                allNews={this.state.news}
                 keywords={fetchedProfile.Keywords}
               />
             </div>

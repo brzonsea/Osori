@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { ko } from '../../lang';
 import NewsCardMeta from './NewsCardMeta';
-import NewsObjToList from '../../lib/NewsObjToList';
-import DateParser from '../../lib/DateParser';
+import { DateParser, NewsObjToList } from '../../lib';
 import './NewsList.css';
 
 class NewsList extends Component {
@@ -54,7 +53,7 @@ class NewsList extends Component {
               );
             });
           return (
-            <div className="News-day-card" key={Date}>
+            <div className="News-day-card" key={`${year}.${month}.${day}`} id={`${year}.${month}.${day}`}>
               <NewsCardMeta date={{ year, month, day}} keywords={keywords[Date]} />
              {newsCardDay}
             </div>

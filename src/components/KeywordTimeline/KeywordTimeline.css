@@ -25,23 +25,58 @@
   margin-top: 80px;
   margin-bottom: 50px;
 }
-.keyword-tag-box {
-  overflow: visible;
-  visibility: visible;
+
+.keyword-date-box {
   position: absolute;
-  top: -60px;
+  top: -30px;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+}
+
+.keyword-date-text {
+  width: 180px;
+  height: 30px;
+  font-family: NanumSquare;
+  font-size: 20px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #8a8a8a;
+}
+
+.tag-box-container {
+  position: absolute;
+  top: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.keyword-tag-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   height: 58px;
+  max-width: 180px;
   border-radius: 29px;
   background-color: #f5a623;
-  margin-left: -2px;
-  margin-right: -2px;
 }
 
 .tag {
+  max-width: 156px;
   font-family: NanumSquare;
   font-size: 24px;
   font-weight: normal;
@@ -50,6 +85,17 @@
   line-height: normal;
   letter-spacing: normal;
   text-align: left;
-  color: #000;
+  color: #fff;
   margin: 12px 20px 12px 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.tag-box-triangle {
+	width: 0;
+	height: 0;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-bottom: 7px solid #f5a623;
 }
