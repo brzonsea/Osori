@@ -1,22 +1,55 @@
 .Keyword-timeline-container {
   background-color: #fafafa;
   display: flex;
-  padding-bottom: 30px;
   margin-left: 180px;
   margin-right: 180px;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .title-row {
   width: 212px;
   height: 35px;
-  font-family: NanumSquare.bold;
+  font-family: NanumSquare;
   font-size: 32px;
-  font-weight: normal;
+  font-weight: bold;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
   letter-spacing: normal;
   text-align: left;
   color: #4a4a4a;
+}
+
+.horizontal-timeline-box {
+  height: 300px;
+  margin-top: 80px;
+  margin-bottom: 50px;
+}
+.keyword-tag-box {
+  overflow: visible;
+  visibility: visible;
+  position: absolute;
+  top: -60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 58px;
+  border-radius: 29px;
+  background-color: #f5a623;
+  margin-left: -2px;
+  margin-right: -2px;
+}
+
+.tag {
+  font-family: NanumSquare;
+  font-size: 24px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000;
+  margin: 12px 20px 12px 20px;
 }

@@ -98,7 +98,9 @@ class ProfilePage extends Component {
                 relatedPpl={fetchedProfile.relatedPpl}
                 profilePicURL={fetchedProfile.Photo}
               />
-              <KeywordTimeline />
+              <KeywordTimeline
+                keywords={fetchedProfile.Keywords}
+              />
             </div>
             <div>
               <NewsList
