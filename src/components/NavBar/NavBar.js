@@ -17,7 +17,9 @@ class NavBar extends Component {
       <div className="NavBar">
         <header className="NavBar-header">
           <div className="About-us">About Us</div>
-          <img src={logo} className="NavBar-logo" />
+          <Link to='/' style={{ textDecoration: 'none' }}>
+            <img src={logo} className="NavBar-logo" />
+          </Link>
           <Link to='/search' style={{ textDecoration: 'none' }}>
             <SearchBoxSmall />
           </Link>

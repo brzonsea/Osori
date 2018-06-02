@@ -59,7 +59,7 @@ class SearchActive extends Component {
   renderSuggestion = suggestion => {
     console.log('Suggestion', suggestion);
     return (
-      <Link to={`/profile/${suggestion.key}`}>
+      <Link to={`/profile/${suggestion.key}`} style={{ textDecoration: 'none' }}>
         <div className="Suggestion-box">
           {suggestion.Name}
         </div>
