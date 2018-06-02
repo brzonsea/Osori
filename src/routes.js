@@ -7,6 +7,7 @@ import SearchActivePage from './routes/SearchActivePage';
 import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner';
 import ProfilePage from './routes/ProfilePage';
 import KeywordPage from './routes/KeywordPage';
+import AboutUsPage from './routes/AboutUsPage';
 
 class Routes extends Component {
   constructor(props) {
@@ -34,6 +35,7 @@ class Routes extends Component {
         <Route path='/search' component={SearchActivePage} />
         <Route path='/profile/:id' component={ProfilePage} />
         <Route path='/keyword/:keyword' component={KeywordPage} />
+        <Route path='/about-us/' component={AboutUsPage} />
       </Switch>
     )
   }
