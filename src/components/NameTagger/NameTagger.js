@@ -28,7 +28,6 @@ class NameTagger extends Component {
 
   apiRequest() {
     const { value } = this.state;
-    const token = 'de451a0ddc14a65c0076bdd61e0df8d85d4a3d2ffae1b52d';
     if (value && value.value) {
       axios.get(`http://cathead.keci.ml:32768/nametag-demo/${value.value}`)
       .then((response) => {
