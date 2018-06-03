@@ -17,7 +17,8 @@ class NameTagger extends Component {
 				{ value: '시진핑 주석이 미세먼지를 좋아한다.',
           label: '시진핑 주석이 미세먼지를 좋아한다.' }
 			],
-			value: undefined
+			value: undefined,
+      detected: null,
     }
   }
 
@@ -29,13 +30,16 @@ class NameTagger extends Component {
     const { value } = this.state;
     const token = 'de451a0ddc14a65c0076bdd61e0df8d85d4a3d2ffae1b52d';
     if (value && value.value) {
-      axios.get(`http://cathead.keci.ml:32768/nametag-demo/${value.value}`,
-        {
-          withCredentials: true,
-          token: token,
-      })
+      axios.get(`http://cathead.keci.ml:32768/nametag-demo/${value.value}`)
       .then((response) => {
-        console.log('Response', response);
+        console.log('Response', response, response.data);
+        const parseResponse = response.data.slice(1, response.data.length - 1);
+        console.log('parseResponse', parseResponse);
+        if (parseResponse) {
+          this.setState({ detected: parseResponse });
+        } else {
+          this.setState({ detected: 'None' });
+        }
       }).catch(err => {
         console.log('Error', err);
       });
@@ -61,11 +65,16 @@ class NameTagger extends Component {
 				/>
         <div className="button-row">
           <button
-            class="button"
+            className="button"
             onClick={this.apiRequest.bind(this)}
           >Check Osori</button>
         </div>
-				<div className="hint">{this.props.hint}</div>
+        {
+          this.state.detected &&
+          <div className="detected-names">
+            {`찾은 이름: ${this.state.detected}`}
+            </div>
+        }
 			</div>
 		);
 	}
