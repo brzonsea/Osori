@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import NavBar from '../components/NavBar/NavBar';
 import RelatedPeople from '../components/RelatedPeople/RelatedPeople';
+import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
 import { CheckEmptyObj, DateParser } from '../lib';
 import './KeywordPage.css';
 
@@ -36,20 +37,31 @@ class KeywordPage extends Component {
   componentWillReceiveProps(nextProps) {
     this.propsHandler(nextProps);
   }
-  
+
   render() {
     const { match } = this.props;
     console.log('KeywordPage props', this.props);
     console.log('KeywordPage state', this.state);
+    const { profiles, keywords, news } = this.state;
     return(
       <div>
         <NavBar />
-        <div className="keyword-title">
-          <div className="keyword-title-text">
-          {`#${match.params.keyword}`}
-          </div>
-        </div>
-        <RelatedPeople />
+        {
+          !CheckEmptyObj(profiles) && !CheckEmptyObj(keywords) && !CheckEmptyObj(news) ?
+          <div>
+            <div className="keyword-title">
+              <div className="keyword-title-text">
+                {`#${match.params.keyword}`}
+              </div>
+            </div>
+            <RelatedPeople
+              allprofiles={profiles}
+              keywords={keywords}
+              keyword={match.params.keyword}
+            />
+          </div> :
+          <LoadingSpinner loading />
+        }
       </div>
     );
   }
