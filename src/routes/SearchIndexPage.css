@@ -1,0 +1,9 @@
+.main-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wordcloud-wrapper {
+  margin-top: 200px;
+}

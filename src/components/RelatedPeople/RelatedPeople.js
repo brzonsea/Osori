@@ -14,16 +14,14 @@ class RelatedPeople extends Component {
   componentDidMount() {
     const { allprofiles, keywords, keyword } = this.props;
     const keywordInfo = keywords[keyword];
-    console.log('keywordInfo', keywordInfo);
     const relatedPplList = keywordInfo.Names.map((id) => {
       return {
         id,
         ...allprofiles[id]
       };
     });
-    const relatedPeopleList = relatedPplList.filter((item, pos) => {
-      return relatedPplList.indexOf(item) == pos;
-    })
+    const relatedPeopleList = relatedPplList.filter((s1, pos, arr) =>
+      arr.findIndex((s2)=>s2.id === s1.id) === pos);
     console.log('relatedPeopleList', relatedPeopleList);
     this.setState({ relatedPeopleList });
   }
@@ -38,7 +36,6 @@ class RelatedPeople extends Component {
         <div className="related-people-row">
           {
             relatedPeopleList.map((person, index) => {
-              console.log('to show ', person);
               return (
                 <PersonCard
                   person={person}
