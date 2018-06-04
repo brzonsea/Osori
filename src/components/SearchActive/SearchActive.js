@@ -32,8 +32,8 @@ class SearchActive extends Component {
     const regex = new RegExp('\\b' + escapedValue, 'i');
     return inputLength === 0 ? [] : profilesList.filter(profile => {
       if (profile.key === '0') return;
-      const compareString = profile.Name.toLowerCase().slice(0, inputLength);
-      return compareString === inputValue
+      // const compareString = profile.Name.toLowerCase().slice(0, inputLength);
+      return profile.Name.toLowerCase().includes(inputValue);
     }
     );
   }

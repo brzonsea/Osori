@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import GoogleImages from 'google-images';
 import './ProfileMain.css';
-
-const API_KEY = 'AIzaSyC8L-IC-hN1-5TDxemn91lTMEc4RWHkTsI';
-const CSE_ID = '006609745617069818875:lbvun3-obqi';
-const client = new GoogleImages(CSE_ID, API_KEY);
 
 class ProfileMain extends Component {
   constructor(props) {
@@ -34,17 +29,6 @@ class ProfileMain extends Component {
       profilePicURL,
       relatedPpl
     })
-  }
-
-  fetchGoogleImage(name) {
-    client.search(name)
-        .then(images => {
-          if (images.length !== 0) {
-            this.setState({ profilePicURL: images[0].thumbnail.url })
-          }
-    }).catch(err => {
-      console.log('Something wrong while fetching image search ', err);
-    });
   }
 
   render() {
